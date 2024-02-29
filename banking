@@ -1,0 +1,93 @@
+using System;
+
+namespace BankingApplication
+{
+    // Base class for student details
+    public class Student
+    {
+        public int StudentId { get; set; }
+        public string Name { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string Address { get; set; }
+    }
+
+    // Subfolder: AcademicDetails
+    public class AcademicDetails
+    {
+        public int StudentId { get; set; }
+        public string Course { get; set; }
+        public string Department { get; set; }
+        public int Year { get; set; }
+    }
+
+    // Subfolder: FinancialDetails
+    public class FinancialDetails
+    {
+        public int StudentId { get; set; }
+        public decimal Balance { get; set; }
+        public decimal ScholarshipAmount { get; set; }
+    }
+
+    // Master details
+    public class MasterDetails
+    {
+        public Student Student { get; set; }
+        public AcademicDetails AcademicDetails { get; set; }
+        public FinancialDetails FinancialDetails { get; set; }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Creating a sample student
+            var student = new Student
+            {
+                StudentId = 1,
+                Name = "John Doe",
+                DateOfBirth = new DateTime(2000, 1, 1),
+                Address = "123 Main St"
+            };
+
+            // Creating academic details
+            var academicDetails = new AcademicDetails
+            {
+                StudentId = student.StudentId,
+                Course = "Computer Science",
+                Department = "Engineering",
+                Year = 2
+            };
+
+            // Creating financial details
+            var financialDetails = new FinancialDetails
+            {
+                StudentId = student.StudentId,
+                Balance = 1000,
+                ScholarshipAmount = 200
+            };
+
+            // Combining all details into master details
+            var masterDetails = new MasterDetails
+            {
+                Student = student,
+                AcademicDetails = academicDetails,
+                FinancialDetails = financialDetails
+            };
+
+            // Printing master details
+            Console.WriteLine("Student Details:");
+            Console.WriteLine($"Name: {masterDetails.Student.Name}");
+            Console.WriteLine($"Date of Birth: {masterDetails.Student.DateOfBirth}");
+            Console.WriteLine($"Address: {masterDetails.Student.Address}");
+            Console.WriteLine();
+            Console.WriteLine("Academic Details:");
+            Console.WriteLine($"Course: {masterDetails.AcademicDetails.Course}");
+            Console.WriteLine($"Department: {masterDetails.AcademicDetails.Department}");
+            Console.WriteLine($"Year: {masterDetails.AcademicDetails.Year}");
+            Console.WriteLine();
+            Console.WriteLine("Financial Details:");
+            Console.WriteLine($"Balance: {masterDetails.FinancialDetails.Balance}");
+            Console.WriteLine($"Scholarship Amount: {masterDetails.FinancialDetails.ScholarshipAmount}");
+        }
+    }
+}
